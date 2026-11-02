@@ -144,6 +144,28 @@
 .site>.ov{transform-style:preserve-3d;transform:translateZ(18px)}
 .site .pn{transform:translateZ(34px)}
 .site>.fab{transform:translateZ(46px)}
+/* ===== MOBILE / PORTRAIT ===== */
+.pt .row2{flex-direction:column;align-items:flex-start;justify-content:center;gap:44px;padding:0 60px}
+.pt .lc{width:100%}
+.pt .lc .line{font-size:32px!important;white-space:normal!important;line-height:1.6;margin-top:24px}
+.pt .lc .lab{font-size:24px}
+.pt .pl{flex-direction:row;flex-wrap:wrap;margin-top:24px;gap:12px}
+.pt .pl .chip{font-size:21px;padding:10px 20px}
+.pt .mk{width:100%;flex:none}
+.pt .site{height:880px;font-size:22px;animation:siteInP 1.6s .3s cubic-bezier(.16,1,.3,1) both,siteDriftP 13s 1.9s ease-in-out infinite alternate}
+@keyframes siteInP{from{opacity:0;transform:rotateY(-70deg) rotateX(20deg) translateZ(-400px)}to{opacity:1;transform:rotateY(-9deg) rotateX(5deg)}}
+@keyframes siteDriftP{from{transform:rotateY(-9deg) rotateX(5deg)}to{transform:rotateY(-3deg) rotateX(1deg) translateZ(30px)}}
+.pt .nst{display:none}
+.pt .mk.fin{width:100%}
+.pt .mk.fin .site{height:720px;font-size:21px}
+.pt .cc{padding:0 60px}
+.pt .cc.nm{padding:0 50px}
+.pt .stats{gap:40px;flex-wrap:wrap;margin-top:36px}
+.pt .stats b{font-size:110px}
+.pt .stats small{font-size:20px}
+.pt .fr{gap:22px;margin-bottom:34px}
+.pt .cw:nth-child(n+6){display:none}
+.pt .world{perspective:900px}
 </style></head><body>
 <div id="stage"><div class="carbon"></div><div class="streak"></div><div class="streak b"></div><div id="scene" class="on"></div><div id="wipe"></div><div class="vig"></div><div class="grain"></div></div>
 <div id="start"><button id="go">&#9654; PLAY TRAILER</button><small id="st">Loading music...</small></div>
@@ -210,7 +232,7 @@ SC.push([22.16,side('COMPLAINT BOX','Report<br>A Problem',['NOT WORKING ON MY DE
 SC.push([22.74,`<div class="cc nm" style="align-items:center;padding:0 100px"><div class="fr"><div class="mark">&lt;/&gt;</div><div class="big slm" style="--d:0;font-size:110px">CS Notes</div></div><div class="mk fin" style="--d:.92"><div class="site">${SITE.fin()}</div></div><div class="line slm" style="--d:3.69;color:var(--ac);font-size:38px;margin-top:30px">LEARN IT. NOTE IT. KNOW IT.</div><div class="line" style="--d:5.54;font-size:36px;letter-spacing:.04em;margin-top:14px">https://pakgamer1242.github.io/cs_notes.com.pk/</div></div>`]);
 const ST=[];let T=0;SC.forEach(s=>{ST.push(T);T+=s[0]});
 let cur=-1,wn=-1,base=0,started=false,audioOK=false,lastN=-1;
-const fit=()=>{st.style.transform=`translate(-50%,-50%) scale(${Math.min(innerWidth/1920,innerHeight/1080)})`};fit();addEventListener('resize',fit);
+const fit=()=>{const p=innerHeight>innerWidth*1.05,W=p?1080:1920,H=p?1920:1080;st.classList.toggle('pt',p);st.style.width=W+'px';st.style.height=H+'px';st.style.transform=`translate(-50%,-50%) scale(${Math.min(innerWidth/W,innerHeight/H)})`;if(cur>=0)shrink()};fit();addEventListener('resize',fit);addEventListener('orientationchange',()=>setTimeout(fit,250));
 function shrink(){sc.querySelectorAll('.big,.line').forEach(e=>{e.style.fontSize='';const w=e.clientWidth;if(w&&e.scrollWidth>w+1){e.style.fontSize=Math.floor(parseFloat(getComputedStyle(e).fontSize)*w/e.scrollWidth*.97)+'px'}})}
 if(document.fonts)document.fonts.addEventListener('loadingdone',()=>{if(cur>=0)shrink()});
 function frame(){if(started){let t=Math.min(T,(performance.now()-base)/1000);if(audioOK&&!A.paused&&A.currentTime>.05){t=Math.min(T,A.currentTime);base=performance.now()-t*1000}let i=0;for(let k=0;k<SC.length;k++)if(t>=ST[k])i=k;
